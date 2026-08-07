@@ -44,3 +44,4 @@ Windows PowerShell 5.1의 `irm`은 서버가 charset을 명시하지 않으면 I
 - macOS: 공식 설치 프로그램이 손상된 `~/.local/bin/claude`를 덮어쓰지 못함 → 사전 제거 후 재설치
 - macOS 13 미만 / 32비트 Windows 조기 차단
 - 캡티브 포털/프록시가 반환한 HTML을 iex하지 않도록 부트스트랩에서 내용 검증
+- Node.js 보너스 설치(Mac: nvm v0.40.6 고정 / Windows: winget OpenJS.NodeJS.LTS) — **실패해도 반드시 계속 진행** (경고만). nvm은 `set -u`와 비호환이라 소싱 전후로 `set +u`/`set -u` 전환 필수

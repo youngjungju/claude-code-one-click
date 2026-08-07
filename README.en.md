@@ -3,7 +3,7 @@
 [🇰🇷 한국어](README.md) · **[🇺🇸 English](README.en.md)**
 
 > Never used a terminal before? No problem. **This page is all you need.**
-> Paste one line and everything — install, setup, launch — happens automatically.
+> Paste one line and everything — install, setup, launch — happens automatically. (**Node.js** LTS is also installed for you if missing.)
 
 [![Install on macOS](https://img.shields.io/badge/🍎_macOS-Install-0071e3?style=for-the-badge)](#-install-on-macos)
 [![Install on Windows](https://img.shields.io/badge/🪟_Windows-Install-0078d4?style=for-the-badge)](#-install-on-windows)
@@ -104,6 +104,7 @@ Claude will diagnose your exact situation. Afterwards, **close and reopen** the 
 2. Runs the [official Anthropic installer](https://claude.ai/install.sh) — this repo merely wraps it with beginner-friendly automation (PATH setup, common-trap detection, guided errors)
 3. Makes the `claude` command work in your terminal
 4. Detects settings that block login
-5. Verifies the install, then launches Claude
+5. Installs **Node.js** LTS if missing (Mac: nvm — no admin password / Windows: winget) — failures never block the Claude Code install
+6. Verifies the install, then launches Claude
 
 All code is right here in this repository for inspection.

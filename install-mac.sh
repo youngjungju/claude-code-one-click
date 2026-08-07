@@ -10,7 +10,8 @@
 #   2. Claude Code 공식 설치
 #   3. PATH 자동 등록 (~/.zshrc 또는 ~/.bashrc)
 #   4. ANTHROPIC_API_KEY 충돌 함정 감지
-#   5. 설치 검증 후 Claude 바로 실행 (로그인 화면까지 연결)
+#   5. Node.js 확인 (없으면 nvm으로 LTS 함께 설치 — 실패해도 계속 진행)
+#   6. 설치 검증 후 Claude 바로 실행 (로그인 화면까지 연결)
 #
 set -uo pipefail
 
@@ -47,7 +48,7 @@ printf '%s   Claude Code 원클릭 설치를 시작합니다%s\n' "$C_BOLD" "$C_
 printf '%s══════════════════════════════════════════════%s\n' "$C_BOLD" "$C_RESET"
 
 # ── [1/5] 환경 확인 ─────────────────────────────────────────
-step "1/5" "환경을 확인하는 중..."
+step "1/6" "환경을 확인하는 중..."
 
 OS_NAME="$(uname -s)"
 case "$OS_NAME" in
@@ -81,12 +82,12 @@ fi
 
 # ── [2/5] Claude Code 설치 ──────────────────────────────────
 if [ -n "$ALREADY_INSTALLED" ]; then
-  step "2/5" "Claude Code가 이미 설치되어 있습니다 — 설치 단계를 건너뜁니다."
+  step "2/6" "Claude Code가 이미 설치되어 있습니다 — 설치 단계를 건너뜁니다."
   ok "설치 위치: $ALREADY_INSTALLED"
   ok "버전: $("$ALREADY_INSTALLED" --version 2>/dev/null)"
 else
   if [ -n "$BROKEN_INSTALL" ]; then
-    step "2/5" "기존 설치가 손상되어 있어 다시 설치합니다... (30초~2분 정도 걸립니다)"
+    step "2/6" "기존 설치가 손상되어 있어 다시 설치합니다... (30초~2분 정도 걸립니다)"
     warn "손상된 파일: $BROKEN_INSTALL"
     # 공식 설치 프로그램은 이 자리에 남은 손상된 파일을 덮어쓰지 못하므로 미리 제거.
     # 안전을 위해 $HOME/.local/bin 안에 있는 파일만 지운다.
@@ -94,7 +95,7 @@ else
       "$HOME/.local/bin/"*) rm -f "$BROKEN_INSTALL" ;;
     esac
   else
-    step "2/5" "Claude Code를 설치하는 중... (30초~2분 정도 걸립니다)"
+    step "2/6" "Claude Code를 설치하는 중... (30초~2분 정도 걸립니다)"
   fi
   if ! curl -fsSL https://claude.ai/install.sh | bash; then
     fail "공식 설치 프로그램 실행에 실패했습니다."
@@ -103,7 +104,7 @@ else
 fi
 
 # ── [3/5] PATH 자동 등록 ────────────────────────────────────
-step "3/5" "터미널에서 'claude' 명령을 바로 쓸 수 있게 설정하는 중..."
+step "3/6" "터미널에서 'claude' 명령을 바로 쓸 수 있게 설정하는 중..."
 
 # 현재 세션에 즉시 적용
 case ":$PATH:" in
@@ -139,7 +140,7 @@ for rc in "${RC_FILES[@]}"; do
 done
 
 # ── [4/5] 흔한 함정 점검 ────────────────────────────────────
-step "4/5" "로그인을 방해하는 설정이 있는지 점검하는 중..."
+step "4/6" "로그인을 방해하는 설정이 있는지 점검하는 중..."
 
 if [ -n "${ANTHROPIC_API_KEY:-}" ]; then
   unset ANTHROPIC_API_KEY
@@ -155,8 +156,33 @@ for rc in "$HOME/.zshrc" "$HOME/.bashrc" "$HOME/.bash_profile" "$HOME/.profile";
 done
 ok "점검 완료"
 
-# ── [5/5] 설치 검증 ─────────────────────────────────────────
-step "5/5" "설치가 잘 됐는지 확인하는 중..."
+# ── [5/6] Node.js 확인/설치 (보너스 — 실패해도 계속 진행) ────
+step "5/6" "Node.js를 확인하는 중... (없으면 함께 설치합니다)"
+
+if command -v node >/dev/null 2>&1; then
+  ok "Node.js $(node --version 2>/dev/null) — 이미 설치되어 있음"
+else
+  printf '  Node.js LTS를 설치합니다... (1~3분 걸릴 수 있어요)\n'
+  # nvm: 관리자 비밀번호 없이 사용자 폴더에 설치되는 표준 도구
+  export NVM_DIR="$HOME/.nvm"
+  if curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.6/install.sh | bash >/dev/null 2>&1; then
+    # nvm은 set -u 와 호환되지 않으므로 잠시 해제
+    set +u
+    # shellcheck disable=SC1091
+    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+    nvm install --lts >/dev/null 2>&1
+    set -u
+  fi
+  if command -v node >/dev/null 2>&1; then
+    ok "Node.js $(node --version 2>/dev/null) 설치 완료"
+  else
+    warn "Node.js 자동 설치에 실패했지만 Claude Code 사용에는 문제 없습니다."
+    warn "필요해지면 https://nodejs.org 에서 직접 설치할 수 있습니다."
+  fi
+fi
+
+# ── [6/6] 설치 검증 ─────────────────────────────────────────
+step "6/6" "설치가 잘 됐는지 확인하는 중..."
 
 CLAUDE_CMD=""
 if command -v claude >/dev/null 2>&1; then

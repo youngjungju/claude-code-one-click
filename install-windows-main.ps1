@@ -12,7 +12,8 @@
 #    4. Claude Code 공식 설치
 #    5. PATH 자동 등록 (창을 새로 열 필요 없음)
 #    6. ANTHROPIC_API_KEY 충돌 함정 감지
-#    7. 설치 검증 후 Claude 바로 실행 (로그인 화면까지 연결)
+#    7. Node.js 확인 (없으면 winget으로 LTS 함께 설치 - 실패해도 계속 진행)
+#    8. 설치 검증 후 Claude 바로 실행 (로그인 화면까지 연결)
 # =====================================================================
 
 # 한글이 깨지지 않도록 콘솔 출력 인코딩을 UTF-8로 전환
@@ -48,7 +49,7 @@ function Invoke-ClaudeOneClickInstall {
     Write-Host "==============================================" -ForegroundColor White
 
     # --- [1/6] 환경 확인 -------------------------------------------------
-    Write-Step "1/6" "환경을 확인하는 중..."
+    Write-Step "1/7" "환경을 확인하는 중..."
 
     # 64비트 Windows인데 32비트(x86) PowerShell로 실행된 경우 → 64비트로 재실행
     if ($env:PROCESSOR_ARCHITEW6432) {
@@ -69,7 +70,7 @@ function Invoke-ClaudeOneClickInstall {
     $retryCmd   = 'irm https://raw.githubusercontent.com/youngjungju/claude-code-one-click/main/install-windows.ps1 | iex'
 
     # --- [2/6] 이미 설치되어 있는지 확인 ---------------------------------
-    Write-Step "2/6" "Claude Code가 이미 설치되어 있는지 확인하는 중..."
+    Write-Step "2/7" "Claude Code가 이미 설치되어 있는지 확인하는 중..."
     $alreadyInstalled = $null
     $found = Get-Command claude -ErrorAction SilentlyContinue
     if ($found) { $alreadyInstalled = $found.Source }
@@ -98,7 +99,7 @@ function Invoke-ClaudeOneClickInstall {
     }
 
     # --- [3/6] Git for Windows 확인 (선택사항) ----------------------------
-    Write-Step "3/6" "Git for Windows를 확인하는 중... (없어도 설치는 계속됩니다)"
+    Write-Step "3/7" "Git for Windows를 확인하는 중... (없어도 설치는 계속됩니다)"
     if (Get-Command git -ErrorAction SilentlyContinue) {
         Write-Ok "Git 확인됨"
     } elseif (Get-Command winget -ErrorAction SilentlyContinue) {
@@ -121,9 +122,9 @@ function Invoke-ClaudeOneClickInstall {
 
     # --- [4/6] Claude Code 공식 설치 --------------------------------------
     if ($alreadyInstalled) {
-        Write-Step "4/6" "설치 단계 건너뜀 (이미 설치됨)"
+        Write-Step "4/7" "설치 단계 건너뜀 (이미 설치됨)"
     } else {
-        Write-Step "4/6" "Claude Code를 설치하는 중... (30초~2분 정도 걸립니다)"
+        Write-Step "4/7" "Claude Code를 설치하는 중... (30초~2분 정도 걸립니다)"
         # 공식 설치 프로그램을 별도 프로세스에서 실행 (현재 창에 영향 없음)
         # 2>&1: 자식 프로세스의 stderr 출력이 에러 레코드로 튀지 않게 병합
         & powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "irm https://claude.ai/install.ps1 | iex" 2>&1 | ForEach-Object { "$_" }
@@ -135,7 +136,7 @@ function Invoke-ClaudeOneClickInstall {
     }
 
     # --- [5/6] PATH 자동 등록 + 함정 점검 ---------------------------------
-    Write-Step "5/6" "PowerShell에서 'claude' 명령을 바로 쓸 수 있게 설정하는 중..."
+    Write-Step "5/7" "PowerShell에서 'claude' 명령을 바로 쓸 수 있게 설정하는 중..."
 
     # 레지스트리를 직접 사용: [Environment]::Get/Set 방식은 %USERPROFILE% 같은
     # 참조를 실제 경로로 풀어버리고 값 타입을 REG_SZ로 강등시킴 (비가역 손상)
@@ -178,8 +179,36 @@ function Invoke-ClaudeOneClickInstall {
         }
     }
 
-    # --- [6/6] 설치 검증 ---------------------------------------------------
-    Write-Step "6/6" "설치가 잘 됐는지 확인하는 중..."
+    # --- [6/7] Node.js 확인/설치 (보너스 - 실패해도 계속 진행) ------------
+    Write-Step "6/7" "Node.js를 확인하는 중... (없으면 함께 설치합니다)"
+    if (Get-Command node -ErrorAction SilentlyContinue) {
+        $nodeVer = $null
+        try { $nodeVer = & node --version 2>$null } catch { }
+        Write-Ok "Node.js $nodeVer - 이미 설치되어 있음"
+    } elseif (Get-Command winget -ErrorAction SilentlyContinue) {
+        Write-Warn2 "Node.js LTS를 설치합니다... (1~3분, 권한 확인 창이 뜨면 '예'를 누르세요)"
+        winget install --id OpenJS.NodeJS.LTS -e --source winget --silent --accept-package-agreements --accept-source-agreements 2>$null
+        if ($LASTEXITCODE -eq 0) {
+            # 방금 설치된 Node를 현재 세션에서 바로 쓸 수 있게 PATH 반영
+            $nodeDir = Join-Path $env:ProgramFiles 'nodejs'
+            if ((Test-Path $nodeDir) -and -not (($env:Path -split ';') -contains $nodeDir)) {
+                $env:Path = "$env:Path;$nodeDir"
+            }
+            $nodeVer = $null
+            try { $nodeVer = & node --version 2>$null } catch { }
+            if ($nodeVer) { Write-Ok "Node.js $nodeVer 설치 완료" }
+            else { Write-Ok "Node.js 설치 완료 (새 창을 열면 node 명령을 쓸 수 있습니다)" }
+        } else {
+            Write-Warn2 "Node.js 자동 설치에 실패했지만 Claude Code 사용에는 문제 없습니다."
+            Write-Warn2 "필요해지면 https://nodejs.org 에서 직접 설치할 수 있습니다."
+        }
+    } else {
+        Write-Warn2 "자동 설치 도구(winget)가 없어 Node.js 설치를 건너뜁니다."
+        Write-Warn2 "필요해지면 https://nodejs.org 에서 직접 설치할 수 있습니다."
+    }
+
+    # --- [7/7] 설치 검증 ---------------------------------------------------
+    Write-Step "7/7" "설치가 잘 됐는지 확인하는 중..."
 
     # 방금 설치한 확실한 경로를 우선 사용 — PATH 어딘가의 다른(깨진) claude에 가려지지 않게
     $claudeCmd = $null

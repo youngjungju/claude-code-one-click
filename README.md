@@ -3,7 +3,7 @@
 **[🇰🇷 한국어](README.md)** · [🇺🇸 English](README.en.md)
 
 > 터미널을 한 번도 안 써봤어도 괜찮습니다. **이 페이지 하나로 설치가 끝납니다.**
-> 명령어 한 줄만 붙여넣으면 설치, 설정, 실행까지 전부 자동으로 진행돼요.
+> 명령어 한 줄만 붙여넣으면 설치, 설정, 실행까지 전부 자동으로 진행돼요. (개발 필수 도구인 **Node.js**도 없으면 함께 설치해 드립니다)
 
 [![macOS 설치하기](https://img.shields.io/badge/🍎_macOS-설치하러_가기-0071e3?style=for-the-badge)](#-macos에서-설치하기)
 [![Windows 설치하기](https://img.shields.io/badge/🪟_Windows-설치하러_가기-0078d4?style=for-the-badge)](#-windows에서-설치하기)
@@ -110,6 +110,7 @@ Claude가 당신의 상황에 맞는 해결책을 알려줍니다. **해결 후�
 2. [Anthropic 공식 설치 프로그램](https://claude.ai/install.sh) 실행 — 이 저장소는 공식 설치를 감싸서 초보자용 자동화(PATH 설정, 흔한 함정 제거, 한국어 안내)를 더한 것뿐입니다
 3. 터미널에서 `claude` 명령이 바로 되도록 설정
 4. 로그인을 방해하는 설정 자동 감지
-5. 설치 검증 후 Claude 실행
+5. **Node.js**가 없으면 LTS 버전 함께 설치 (Mac: nvm — 관리자 비밀번호 불필요 / Windows: winget) — 실패해도 Claude Code 설치는 계속됩니다
+6. 설치 검증 후 Claude 실행
 
 모든 코드는 이 저장소에서 직접 확인할 수 있습니다.
