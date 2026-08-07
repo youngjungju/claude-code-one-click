@@ -25,7 +25,7 @@ Windows PowerShell 5.1의 `irm`은 서버가 charset을 명시하지 않으면 I
 ## 실기기 테스트 체크리스트 (Windows, 약 10분)
 
 1. **한 줄 설치**: `irm https://raw.githubusercontent.com/youngjungju/claude-code-one-click/main/install-windows.ps1 | iex`
-   - [ ] 한글 안 깨짐, `[1/6]`~`[6/6]` 진행
+   - [ ] 한글 안 깨짐, `[1/7]`~`[7/7]` 진행
    - [ ] Git 없을 때 winget 자동 설치 시도, 실패해도 계속 진행
    - [ ] 성공 배너 → 3초 후 claude 실행 → 브라우저 로그인
    - [ ] 같은 창 + 새 창 모두에서 `claude --version` 동작
