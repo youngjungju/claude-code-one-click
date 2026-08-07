@@ -8,6 +8,8 @@
 | `install-windows-main.ps1` (본편) | **UTF-8 with BOM 유지** | 로컬/-File 실행 시 한글 깨짐 |
 | `claude-install.bat` | **ASCII + CRLF 유지, 한글 금지** | cmd는 CP949라 한글 깨짐 |
 | `install-mac.sh` | UTF-8 (BOM 없음) + LF | — |
+| `claude-install.command` | 실행 권한(+x) 유지, **수정 시 zip 재생성 필수** | 브라우저 다운로드는 실행 권한을 날리므로 zip으로만 배포 |
+| `claude-install-mac.zip` | `zip -X claude-install-mac.zip claude-install.command`로 재생성 | zip이 아니면 더블클릭 실행 불가 |
 
 편집 후 확인 명령 (macOS):
 

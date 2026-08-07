@@ -21,6 +21,36 @@ Claude Code requires a **paid Claude subscription (Pro / Max / Team / Enterprise
 
 ---
 
+## 🖱️ Option 1 — Install with a button click
+
+Double-clicking the downloaded file **opens Terminal / PowerShell automatically** and runs the install. You never type a command.
+
+### 🍎 macOS
+
+[![Download macOS installer](https://img.shields.io/badge/⬇️_macOS_installer-Download-0071e3?style=for-the-badge)](https://raw.githubusercontent.com/youngjungju/claude-code-one-click/main/claude-install-mac.zip)
+
+1. Click the button → double-click the downloaded `claude-install-mac.zip` to unzip (Safari unzips automatically)
+2. **Right-click `claude-install.command` → Open → Open**
+   - A plain double-click may be blocked with an "unidentified developer" warning. On the newest macOS, use **System Settings → Privacy & Security** → **Open Anyway**
+3. Terminal opens by itself and the install runs → Claude launches when done
+
+### 🪟 Windows
+
+[![Download Windows installer](https://img.shields.io/badge/⬇️_Windows_installer-Download-0078d4?style=for-the-badge)](https://raw.githubusercontent.com/youngjungju/claude-code-one-click/main/claude-install.bat)
+
+1. Click the button → if the browser flags it, click **Keep** (or **⋯ → Continue**)
+2. **Double-click** the downloaded `claude-install.bat`
+3. If the blue "Windows protected your PC" screen appears → **More info → Run anyway**
+4. PowerShell opens by itself and the install runs → Claude launches when done
+
+> 💡 The warnings appear only because the files lack a paid corporate code-signing certificate. They do exactly what Option 2's command does, and you can inspect every line in this repository.
+
+---
+
+## ⌨️ Option 2 — Paste one command
+
+The fastest path, with no security prompts.
+
 ## 🍎 Install on macOS
 
 ### Step 1 — Open Terminal
@@ -63,17 +93,7 @@ irm https://raw.githubusercontent.com/youngjungju/claude-code-one-click/main/ins
 
 After `[1/6]`...`[6/6]` and the success banner, Claude launches automatically. Log in when your browser opens.
 
-<details>
-<summary><b>🖱️ PowerShell too scary? — Double-click installer (click to expand)</b></summary>
-
-1. **[👉 Download claude-install.bat](https://raw.githubusercontent.com/youngjungju/claude-code-one-click/main/claude-install.bat)**
-2. If your browser flags the file → click **Keep** (or **⋯ → Continue**)
-3. **Double-click** the downloaded file
-4. If the blue "Windows protected your PC" screen appears → **More info → Run anyway**
-
-> The file does exactly what the one-line command above does. The warnings only appear because it lacks a corporate code-signing certificate.
-
-</details>
+> 🖱️ Prefer not to use PowerShell? See **Option 1 — Install with a button click** above.
 
 ---
 
