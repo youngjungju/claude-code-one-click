@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/banner.svg" alt="Claude Code One-Click Install — paste one line, done" width="100%">
+</p>
+
 # ⚡ Claude Code One-Click Install
 
 [🇰🇷 한국어](README.md) · **[🇺🇸 English](README.en.md)**

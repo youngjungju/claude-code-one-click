@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/banner.svg" alt="Claude Code 원클릭 설치 — 명령어 한 줄이면 끝" width="100%">
+</p>
+
 # ⚡ Claude Code 원클릭 설치
 
 **[🇰🇷 한국어](README.md)** · [🇺🇸 English](README.en.md)
