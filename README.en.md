@@ -6,8 +6,11 @@
 
 [🇰🇷 한국어](README.md) · **[🇺🇸 English](README.en.md)**
 
-> Never used a terminal before? No problem. **This page is all you need.**
-> Paste one line and everything — install, setup, launch — happens automatically. (**Node.js** LTS is also installed for you if missing.)
+> Never used a terminal before? No problem. Installing takes exactly three actions:
+>
+> ### ① Click the copy button on the command below → ② Paste into Terminal / PowerShell → ③ Press Enter
+>
+> Everything else — install, setup, Node.js, launch — happens automatically.
 
 [![Install on macOS](https://img.shields.io/badge/🍎_macOS-Install-0071e3?style=for-the-badge)](#-install-on-macos)
 [![Install on Windows](https://img.shields.io/badge/🪟_Windows-Install-0078d4?style=for-the-badge)](#-install-on-windows)
@@ -21,36 +24,6 @@ Claude Code requires a **paid Claude subscription (Pro / Max / Team / Enterprise
 
 ---
 
-## 🖱️ Option 1 — Install with a button click
-
-Double-clicking the downloaded file **opens Terminal / PowerShell automatically** and runs the install. You never type a command.
-
-### 🍎 macOS
-
-[![Download macOS installer](https://img.shields.io/badge/⬇️_macOS_installer-Download-0071e3?style=for-the-badge)](https://raw.githubusercontent.com/youngjungju/claude-code-one-click/main/claude-install-mac.zip)
-
-1. Click the button → double-click the downloaded `claude-install-mac.zip` to unzip (Safari unzips automatically)
-2. **Right-click `claude-install.command` → Open → Open**
-   - A plain double-click may be blocked with an "unidentified developer" warning. On the newest macOS, use **System Settings → Privacy & Security** → **Open Anyway**
-3. Terminal opens by itself and the install runs → Claude launches when done
-
-### 🪟 Windows
-
-[![Download Windows installer](https://img.shields.io/badge/⬇️_Windows_installer-Download-0078d4?style=for-the-badge)](https://raw.githubusercontent.com/youngjungju/claude-code-one-click/main/claude-install.bat)
-
-1. Click the button → if the browser flags it, click **Keep** (or **⋯ → Continue**)
-2. **Double-click** the downloaded `claude-install.bat`
-3. If the blue "Windows protected your PC" screen appears → **More info → Run anyway**
-4. PowerShell opens by itself and the install runs → Claude launches when done
-
-> 💡 The warnings appear only because the files lack a paid corporate code-signing certificate. They do exactly what Option 2's command does, and you can inspect every line in this repository.
-
----
-
-## ⌨️ Option 2 — Paste one command
-
-The fastest path, with no security prompts.
-
 ## 🍎 Install on macOS
 
 ### Step 1 — Open Terminal
@@ -58,9 +31,9 @@ The fastest path, with no security prompts.
 1. Press **⌘ Command + Space** (Spotlight search opens)
 2. Type **terminal** and press **Enter**
 
-### Step 2 — Copy & paste this command
+### Step 2 — Copy & paste this one line
 
-Hover over the box below and click the **copy button (📋)** on the right.
+Hover over the box below and click the **copy button (📋)** in its top-right corner.
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/youngjungju/claude-code-one-click/main/install-mac.sh | bash
@@ -70,7 +43,7 @@ Click the Terminal window, paste with **⌘ Command + V**, press **Enter**.
 
 ### Step 3 — Done!
 
-You'll see progress steps `[1/5]`...`[5/5]`, then a success banner. Claude launches automatically after 3 seconds — log in when your browser opens. From now on, just type `claude` in any terminal.
+You'll see progress steps `[1/6]`...`[6/6]`, then a success banner. Claude launches automatically after 3 seconds — log in when your browser opens. From now on, just type `claude` in any terminal.
 
 ---
 
@@ -81,7 +54,9 @@ You'll see progress steps `[1/5]`...`[5/5]`, then a success banner. Claude launc
 1. Press the **⊞ Windows key**
 2. Type **powershell** and press **Enter**
 
-### Step 2 — Copy & paste this command
+### Step 2 — Copy & paste this one line
+
+Click the **copy button (📋)** in the top-right corner of the box below.
 
 ```powershell
 irm https://raw.githubusercontent.com/youngjungju/claude-code-one-click/main/install-windows.ps1 | iex
@@ -91,9 +66,7 @@ irm https://raw.githubusercontent.com/youngjungju/claude-code-one-click/main/ins
 
 ### Step 3 — Done!
 
-After `[1/6]`...`[6/6]` and the success banner, Claude launches automatically. Log in when your browser opens.
-
-> 🖱️ Prefer not to use PowerShell? See **Option 1 — Install with a button click** above.
+After `[1/7]`...`[7/7]` and the success banner, Claude launches automatically. Log in when your browser opens.
 
 ---
 

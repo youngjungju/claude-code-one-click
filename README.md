@@ -6,8 +6,11 @@
 
 **[🇰🇷 한국어](README.md)** · [🇺🇸 English](README.en.md)
 
-> 터미널을 한 번도 안 써봤어도 괜찮습니다. **이 페이지 하나로 설치가 끝납니다.**
-> 명령어 한 줄만 붙여넣으면 설치, 설정, 실행까지 전부 자동으로 진행돼요. (개발 필수 도구인 **Node.js**도 없으면 함께 설치해 드립니다)
+> 터미널을 한 번도 안 써봤어도 괜찮습니다. 설치는 이게 전부예요:
+>
+> ### ① 아래 명령어의 복사 버튼 클릭 → ② 터미널/PowerShell에 붙여넣기 → ③ Enter
+>
+> 나머지(설치, 설정, Node.js, 실행)는 전부 자동으로 진행됩니다.
 
 [![macOS 설치하기](https://img.shields.io/badge/🍎_macOS-설치하러_가기-0071e3?style=for-the-badge)](#-macos에서-설치하기)
 [![Windows 설치하기](https://img.shields.io/badge/🪟_Windows-설치하러_가기-0078d4?style=for-the-badge)](#-windows에서-설치하기)
@@ -19,36 +22,6 @@ Claude Code는 **Claude 유료 구독(Pro / Max / Team / Enterprise)** 계정이
 
 ---
 
-## 🖱️ 방법 1 — 버튼 클릭으로 설치
-
-버튼으로 받은 파일을 **더블클릭하면 터미널/PowerShell이 저절로 열리면서** 설치가 진행됩니다. 직접 명령어를 입력할 일이 없어요.
-
-### 🍎 macOS
-
-[![macOS 설치 파일 다운로드](https://img.shields.io/badge/⬇️_macOS_설치_파일-다운로드-0071e3?style=for-the-badge)](https://raw.githubusercontent.com/youngjungju/claude-code-one-click/main/claude-install-mac.zip)
-
-1. 위 버튼 클릭 → 내려받은 `claude-install-mac.zip`을 더블클릭해 압축 해제 (Safari는 자동으로 풀어줍니다)
-2. `claude-install.command` 파일을 **우클릭(두 손가락 클릭) → 열기 → 열기**
-   - 그냥 더블클릭하면 "확인되지 않은 개발자" 경고로 막힐 수 있어요. 우클릭→열기가 안 통하는 최신 macOS는: **시스템 설정 → 개인정보 보호 및 보안** 맨 아래 → **그래도 열기**
-3. 터미널이 자동으로 열리며 설치 진행 → 끝나면 Claude가 바로 실행됩니다
-
-### 🪟 Windows
-
-[![Windows 설치 파일 다운로드](https://img.shields.io/badge/⬇️_Windows_설치_파일-다운로드-0078d4?style=for-the-badge)](https://raw.githubusercontent.com/youngjungju/claude-code-one-click/main/claude-install.bat)
-
-1. 위 버튼 클릭 → 브라우저가 "위험할 수 있습니다"라며 막으면 **유지(Keep)** 또는 **⋯ → 계속**
-2. 내려받은 `claude-install.bat` **더블클릭**
-3. "Windows의 PC 보호" 파란 창이 뜨면 **추가 정보 → 실행**
-4. PowerShell 창이 자동으로 열리며 설치 진행 → 끝나면 Claude가 바로 실행됩니다
-
-> 💡 경고 창이 뜨는 이유는 애플/마이크로소프트에 등록된 유료 회사 서명이 없어서일 뿐입니다. 파일이 하는 일은 아래 "방법 2"의 명령어와 완전히 동일하고, 내용 전체를 이 저장소에서 직접 확인할 수 있습니다.
-
----
-
-## ⌨️ 방법 2 — 명령어 한 줄 복사-붙여넣기
-
-경고 창 없이 가장 빠른 방법입니다. 아래 안내대로 두 번의 클릭(복사, 붙여넣기)이면 끝나요.
-
 ## 🍎 macOS에서 설치하기
 
 ### 1단계 — 터미널 열기
@@ -58,9 +31,9 @@ Claude Code는 **Claude 유료 구독(Pro / Max / Team / Enterprise)** 계정이
 
 > 검은(또는 흰) 글자 입력창이 뜨면 성공! 무서워 보여도 그냥 글자 입력하는 창일 뿐이에요.
 
-### 2단계 — 아래 명령어 복사해서 붙여넣기
+### 2단계 — 아래 명령어 한 줄 복사해서 붙여넣기
 
-아래 상자에 마우스를 올리면 **오른쪽에 복사 버튼(📋)** 이 나타납니다. 클릭 한 번으로 복사하세요.
+아래 상자에 마우스를 올리면 **오른쪽 위에 복사 버튼(📋)** 이 나타납니다. 클릭 한 번이면 복사 끝.
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/youngjungju/claude-code-one-click/main/install-mac.sh | bash
@@ -70,7 +43,7 @@ curl -fsSL https://raw.githubusercontent.com/youngjungju/claude-code-one-click/m
 
 ### 3단계 — 끝!
 
-화면에 `[1/5]`, `[2/5]`... 진행 상황이 한국어로 표시되고, 마지막에 **🎉 설치 성공!** 이 뜨면 3초 후 Claude가 자동 실행됩니다. 브라우저가 열리면 로그인하세요. 앞으로는 터미널에 `claude` 라고만 입력하면 됩니다.
+화면에 `[1/6]`, `[2/6]`... 진행 상황이 한국어로 표시되고, 마지막에 **🎉 설치 성공!** 이 뜨면 3초 후 Claude가 자동 실행됩니다. 브라우저가 열리면 로그인하세요. 앞으로는 터미널에 `claude` 라고만 입력하면 됩니다.
 
 ---
 
@@ -83,9 +56,9 @@ curl -fsSL https://raw.githubusercontent.com/youngjungju/claude-code-one-click/m
 
 > 파란(또는 검은) 글자 입력창이 뜨면 성공!
 
-### 2단계 — 아래 명령어 복사해서 붙여넣기
+### 2단계 — 아래 명령어 한 줄 복사해서 붙여넣기
 
-아래 상자 오른쪽의 **복사 버튼(📋)** 을 클릭하세요.
+아래 상자 오른쪽 위의 **복사 버튼(📋)** 을 클릭하세요.
 
 ```powershell
 irm https://raw.githubusercontent.com/youngjungju/claude-code-one-click/main/install-windows.ps1 | iex
@@ -95,9 +68,7 @@ PowerShell 창에서 **마우스 우클릭**으로 붙여넣고 **Enter**. (우�
 
 ### 3단계 — 끝!
 
-`[1/6]`, `[2/6]`... 진행 후 **설치 성공!** 이 뜨면 3초 후 Claude가 자동 실행됩니다. 브라우저가 열리면 로그인하세요.
-
-> 🖱️ PowerShell이 어렵다면 위의 **[방법 1 — 버튼 클릭으로 설치](#%EF%B8%8F-방법-1--버튼-클릭으로-설치)** 를 이용하세요.
+`[1/7]`, `[2/7]`... 진행 후 **설치 성공!** 이 뜨면 3초 후 Claude가 자동 실행됩니다. 브라우저가 열리면 로그인하세요.
 
 ---
 
