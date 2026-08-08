@@ -10,7 +10,7 @@
 >
 > ### ① 아래 명령어의 복사 버튼 클릭 → ② 터미널/PowerShell에 붙여넣기 → ③ Enter
 >
-> 나머지(설치, 설정, Node.js, 실행)는 전부 자동으로 진행됩니다.
+> 나머지(설치, 설정, Node.js · GitHub CLI · Vercel CLI, 실행)는 전부 자동으로 진행됩니다.
 
 [![macOS 설치하기](https://img.shields.io/badge/🍎_macOS-설치하러_가기-0071e3?style=for-the-badge)](#-macos에서-설치하기)
 [![Windows 설치하기](https://img.shields.io/badge/🪟_Windows-설치하러_가기-0078d4?style=for-the-badge)](#-windows에서-설치하기)
@@ -43,7 +43,7 @@ curl -fsSL https://raw.githubusercontent.com/youngjungju/claude-code-one-click/m
 
 ### 3단계 — 끝!
 
-화면에 `[1/6]`, `[2/6]`... 진행 상황이 한국어로 표시되고, 마지막에 **🎉 설치 성공!** 이 뜨면 3초 후 Claude가 자동 실행됩니다. 브라우저가 열리면 로그인하세요. 앞으로는 터미널에 `claude` 라고만 입력하면 됩니다.
+화면에 `[1/7]`, `[2/7]`... 진행 상황이 한국어로 표시되고, 마지막에 **🎉 설치 성공!** 이 뜨면 3초 후 Claude가 자동 실행됩니다. 브라우저가 열리면 로그인하세요. 앞으로는 터미널에 `claude` 라고만 입력하면 됩니다.
 
 ---
 
@@ -68,7 +68,7 @@ PowerShell 창에서 **마우스 우클릭**으로 붙여넣고 **Enter**. (우�
 
 ### 3단계 — 끝!
 
-`[1/7]`, `[2/7]`... 진행 후 **설치 성공!** 이 뜨면 3초 후 Claude가 자동 실행됩니다. 브라우저가 열리면 로그인하세요.
+`[1/8]`, `[2/8]`... 진행 후 **설치 성공!** 이 뜨면 3초 후 Claude가 자동 실행됩니다. 브라우저가 열리면 로그인하세요.
 
 ---
 
@@ -106,6 +106,7 @@ Claude가 당신의 상황에 맞는 해결책을 알려줍니다. **해결 후�
 3. 터미널에서 `claude` 명령이 바로 되도록 설정
 4. 로그인을 방해하는 설정 자동 감지
 5. **Node.js**가 없으면 LTS 버전 함께 설치 (Mac: nvm — 관리자 비밀번호 불필요 / Windows: winget) — 실패해도 Claude Code 설치는 계속됩니다
-6. 설치 검증 후 Claude 실행
+6. **GitHub CLI(gh)**와 **Vercel CLI**가 없으면 함께 설치 (Mac: brew 또는 공식 바이너리를 사용자 폴더에 / Windows: winget, Vercel은 npm) — 역시 실패해도 계속 진행
+7. 설치 검증 후 Claude 실행
 
 모든 코드는 이 저장소에서 직접 확인할 수 있습니다.

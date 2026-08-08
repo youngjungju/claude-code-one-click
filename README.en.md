@@ -10,7 +10,7 @@
 >
 > ### ① Click the copy button on the command below → ② Paste into Terminal / PowerShell → ③ Press Enter
 >
-> Everything else — install, setup, Node.js, launch — happens automatically.
+> Everything else — install, setup, Node.js · GitHub CLI · Vercel CLI, launch — happens automatically.
 
 [![Install on macOS](https://img.shields.io/badge/🍎_macOS-Install-0071e3?style=for-the-badge)](#-install-on-macos)
 [![Install on Windows](https://img.shields.io/badge/🪟_Windows-Install-0078d4?style=for-the-badge)](#-install-on-windows)
@@ -43,7 +43,7 @@ Click the Terminal window, paste with **⌘ Command + V**, press **Enter**.
 
 ### Step 3 — Done!
 
-You'll see progress steps `[1/6]`...`[6/6]`, then a success banner. Claude launches automatically after 3 seconds — log in when your browser opens. From now on, just type `claude` in any terminal.
+You'll see progress steps `[1/7]`...`[7/7]`, then a success banner. Claude launches automatically after 3 seconds — log in when your browser opens. From now on, just type `claude` in any terminal.
 
 ---
 
@@ -66,7 +66,7 @@ irm https://raw.githubusercontent.com/youngjungju/claude-code-one-click/main/ins
 
 ### Step 3 — Done!
 
-After `[1/7]`...`[7/7]` and the success banner, Claude launches automatically. Log in when your browser opens.
+After `[1/8]`...`[8/8]` and the success banner, Claude launches automatically. Log in when your browser opens.
 
 ---
 
@@ -102,6 +102,7 @@ Claude will diagnose your exact situation. Afterwards, **close and reopen** the 
 3. Makes the `claude` command work in your terminal
 4. Detects settings that block login
 5. Installs **Node.js** LTS if missing (Mac: nvm — no admin password / Windows: winget) — failures never block the Claude Code install
-6. Verifies the install, then launches Claude
+6. Installs **GitHub CLI (gh)** and **Vercel CLI** if missing (Mac: brew or the official binary into your user folder / Windows: winget, Vercel via npm) — also never blocking
+7. Verifies the install, then launches Claude
 
 All code is right here in this repository for inspection.

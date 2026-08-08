@@ -32,8 +32,8 @@
   <text x="241" y="292" font-size="17" font-weight="700" fill="#e8d9cc" text-anchor="middle">🍎 macOS</text>
   <rect x="318" y="268" width="140" height="36" rx="18" fill="#3a2c22"/>
   <text x="388" y="292" font-size="17" font-weight="700" fill="#e8d9cc" text-anchor="middle">🪟 Windows</text>
-  <rect x="470" y="268" width="130" height="36" rx="18" fill="#3a2c22"/>
-  <text x="535" y="292" font-size="17" font-weight="700" fill="#e8d9cc" text-anchor="middle">+ Node.js</text>
+  <rect x="470" y="268" width="196" height="36" rx="18" fill="#3a2c22"/>
+  <text x="568" y="292" font-size="15" font-weight="700" fill="#e8d9cc" text-anchor="middle">+ Node.js · gh · vercel</text>
 
   <!-- 터미널 목업 -->
   <g>
@@ -48,15 +48,15 @@
     <g font-family="'SF Mono', Menlo, Consolas, monospace" font-size="16">
       <text x="704" y="116" fill="#7fd18a">$</text>
       <text x="722" y="116" fill="#e8ddd3">curl -fsSL https://…/install-mac.sh | bash</text>
-      <text x="704" y="150" fill="#d97757">[1/6]</text>
+      <text x="704" y="150" fill="#d97757">[1/7]</text>
       <text x="762" y="150" fill="#c9b9ac">환경 확인</text>
       <text x="856" y="150" fill="#28c840">✓</text>
-      <text x="704" y="182" fill="#d97757">[2/6]</text>
+      <text x="704" y="182" fill="#d97757">[2/7]</text>
       <text x="762" y="182" fill="#c9b9ac">Claude Code 설치</text>
       <text x="928" y="182" fill="#28c840">✓</text>
-      <text x="704" y="214" fill="#d97757">[5/6]</text>
-      <text x="762" y="214" fill="#c9b9ac">Node.js 설치</text>
-      <text x="890" y="214" fill="#28c840">✓</text>
+      <text x="704" y="214" fill="#d97757">[6/7]</text>
+      <text x="762" y="214" fill="#c9b9ac">Node.js · gh · vercel</text>
+      <text x="990" y="214" fill="#28c840">✓</text>
       <text x="704" y="252" fill="#7fd18a" font-weight="700">🎉 설치 성공! Claude를 시작합니다…</text>
       <rect x="704" y="264" width="11" height="19" fill="#d97757">
         <animate attributeName="opacity" values="1;0;1" dur="1.2s" repeatCount="indefinite"/>

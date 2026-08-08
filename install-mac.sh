@@ -11,7 +11,8 @@
 #   3. PATH 자동 등록 (~/.zshrc 또는 ~/.bashrc)
 #   4. ANTHROPIC_API_KEY 충돌 함정 감지
 #   5. Node.js 확인 (없으면 nvm으로 LTS 함께 설치 — 실패해도 계속 진행)
-#   6. 설치 검증 후 Claude 바로 실행 (로그인 화면까지 연결)
+#   6. GitHub CLI, Vercel CLI 확인/설치 (선택 도구 — 실패해도 계속 진행)
+#   7. 설치 검증 후 Claude 바로 실행 (로그인 화면까지 연결)
 #
 set -uo pipefail
 
@@ -48,7 +49,7 @@ printf '%s   Claude Code 원클릭 설치를 시작합니다%s\n' "$C_BOLD" "$C_
 printf '%s══════════════════════════════════════════════%s\n' "$C_BOLD" "$C_RESET"
 
 # ── [1/5] 환경 확인 ─────────────────────────────────────────
-step "1/6" "환경을 확인하는 중..."
+step "1/7" "환경을 확인하는 중..."
 
 OS_NAME="$(uname -s)"
 case "$OS_NAME" in
@@ -82,12 +83,12 @@ fi
 
 # ── [2/5] Claude Code 설치 ──────────────────────────────────
 if [ -n "$ALREADY_INSTALLED" ]; then
-  step "2/6" "Claude Code가 이미 설치되어 있습니다 — 설치 단계를 건너뜁니다."
+  step "2/7" "Claude Code가 이미 설치되어 있습니다 — 설치 단계를 건너뜁니다."
   ok "설치 위치: $ALREADY_INSTALLED"
   ok "버전: $("$ALREADY_INSTALLED" --version 2>/dev/null)"
 else
   if [ -n "$BROKEN_INSTALL" ]; then
-    step "2/6" "기존 설치가 손상되어 있어 다시 설치합니다... (30초~2분 정도 걸립니다)"
+    step "2/7" "기존 설치가 손상되어 있어 다시 설치합니다... (30초~2분 정도 걸립니다)"
     warn "손상된 파일: $BROKEN_INSTALL"
     # 공식 설치 프로그램은 이 자리에 남은 손상된 파일을 덮어쓰지 못하므로 미리 제거.
     # 안전을 위해 $HOME/.local/bin 안에 있는 파일만 지운다.
@@ -95,7 +96,7 @@ else
       "$HOME/.local/bin/"*) rm -f "$BROKEN_INSTALL" ;;
     esac
   else
-    step "2/6" "Claude Code를 설치하는 중... (30초~2분 정도 걸립니다)"
+    step "2/7" "Claude Code를 설치하는 중... (30초~2분 정도 걸립니다)"
   fi
   if ! curl -fsSL https://claude.ai/install.sh | bash; then
     fail "공식 설치 프로그램 실행에 실패했습니다."
@@ -104,7 +105,7 @@ else
 fi
 
 # ── [3/5] PATH 자동 등록 ────────────────────────────────────
-step "3/6" "터미널에서 'claude' 명령을 바로 쓸 수 있게 설정하는 중..."
+step "3/7" "터미널에서 'claude' 명령을 바로 쓸 수 있게 설정하는 중..."
 
 # 현재 세션에 즉시 적용
 case ":$PATH:" in
@@ -140,7 +141,7 @@ for rc in "${RC_FILES[@]}"; do
 done
 
 # ── [4/5] 흔한 함정 점검 ────────────────────────────────────
-step "4/6" "로그인을 방해하는 설정이 있는지 점검하는 중..."
+step "4/7" "로그인을 방해하는 설정이 있는지 점검하는 중..."
 
 if [ -n "${ANTHROPIC_API_KEY:-}" ]; then
   unset ANTHROPIC_API_KEY
@@ -156,8 +157,8 @@ for rc in "$HOME/.zshrc" "$HOME/.bashrc" "$HOME/.bash_profile" "$HOME/.profile";
 done
 ok "점검 완료"
 
-# ── [5/6] Node.js 확인/설치 (보너스 — 실패해도 계속 진행) ────
-step "5/6" "Node.js를 확인하는 중... (없으면 함께 설치합니다)"
+# ── [5/7] Node.js 확인/설치 (보너스 — 실패해도 계속 진행) ────
+step "5/7" "Node.js를 확인하는 중... (없으면 함께 설치합니다)"
 
 if command -v node >/dev/null 2>&1; then
   ok "Node.js $(node --version 2>/dev/null) — 이미 설치되어 있음"
@@ -181,8 +182,64 @@ else
   fi
 fi
 
-# ── [6/6] 설치 검증 ─────────────────────────────────────────
-step "6/6" "설치가 잘 됐는지 확인하는 중..."
+# ── [6/7] GitHub CLI + Vercel CLI (보너스 — 실패해도 계속 진행) ──
+step "6/7" "추가 개발 도구를 확인하는 중... (GitHub CLI, Vercel CLI)"
+
+# GitHub CLI (gh)
+install_gh_direct() {
+  # Homebrew 없이 공식 바이너리를 ~/.local/bin에 설치 (관리자 비밀번호 불필요)
+  GH_TAG="$(curl -fsSL https://api.github.com/repos/cli/cli/releases/latest 2>/dev/null | grep -m1 '"tag_name"' | cut -d'"' -f4)"
+  [ -n "$GH_TAG" ] || return 1
+  case "$(uname -m)" in
+    arm64|aarch64) GH_ARCH=arm64 ;;
+    *)             GH_ARCH=amd64 ;;
+  esac
+  GH_TMP="$(mktemp -d)" || return 1
+  if curl -fsSL -o "$GH_TMP/gh.zip" \
+       "https://github.com/cli/cli/releases/download/${GH_TAG}/gh_${GH_TAG#v}_macOS_${GH_ARCH}.zip" \
+     && unzip -q "$GH_TMP/gh.zip" -d "$GH_TMP" 2>/dev/null; then
+    mkdir -p "$LOCAL_BIN"
+    cp "$GH_TMP"/gh_*/bin/gh "$LOCAL_BIN/gh" 2>/dev/null && chmod +x "$LOCAL_BIN/gh"
+  fi
+  rm -rf "$GH_TMP"
+  command -v gh >/dev/null 2>&1
+}
+
+if command -v gh >/dev/null 2>&1; then
+  ok "GitHub CLI — 이미 설치되어 있음"
+else
+  printf '  GitHub CLI를 설치합니다...\n'
+  GH_DONE=""
+  if command -v brew >/dev/null 2>&1; then
+    brew install gh >/dev/null 2>&1 && command -v gh >/dev/null 2>&1 && GH_DONE=1
+  fi
+  if [ -z "$GH_DONE" ] && [ "$OS_NAME" = "Darwin" ]; then
+    install_gh_direct && GH_DONE=1
+  fi
+  if [ -n "$GH_DONE" ]; then
+    ok "GitHub CLI 설치 완료"
+  else
+    warn "GitHub CLI 자동 설치에 실패했지만 계속 진행합니다. (https://cli.github.com)"
+  fi
+fi
+
+# Vercel CLI (npm 필요 — Node.js 단계가 성공했을 때만 가능)
+if command -v vercel >/dev/null 2>&1; then
+  ok "Vercel CLI — 이미 설치되어 있음"
+elif command -v npm >/dev/null 2>&1; then
+  printf '  Vercel CLI를 설치합니다...\n'
+  npm install -g vercel >/dev/null 2>&1
+  if command -v vercel >/dev/null 2>&1; then
+    ok "Vercel CLI 설치 완료"
+  else
+    warn "Vercel CLI 자동 설치에 실패했지만 계속 진행합니다. (https://vercel.com/docs/cli)"
+  fi
+else
+  warn "Vercel CLI는 Node.js(npm)가 필요해서 건너뜁니다."
+fi
+
+# ── [7/7] 설치 검증 ─────────────────────────────────────────
+step "7/7" "설치가 잘 됐는지 확인하는 중..."
 
 CLAUDE_CMD=""
 if command -v claude >/dev/null 2>&1; then

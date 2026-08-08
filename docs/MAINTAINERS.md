@@ -43,3 +43,4 @@ Windows PowerShell 5.1의 `irm`은 서버가 charset을 명시하지 않으면 I
 - macOS 13 미만 / 32비트 Windows 조기 차단
 - 캡티브 포털/프록시가 반환한 HTML을 iex하지 않도록 부트스트랩에서 내용 검증
 - Node.js 보너스 설치(Mac: nvm v0.40.6 고정 / Windows: winget OpenJS.NodeJS.LTS) — **실패해도 반드시 계속 진행** (경고만). nvm은 `set -u`와 비호환이라 소싱 전후로 `set +u`/`set -u` 전환 필수
+- GitHub CLI·Vercel CLI 보너스 설치 — Mac gh: brew 우선, 없으면 공식 릴리스 바이너리를 `~/.local/bin`에 직접 설치(GitHub API로 최신 태그 조회, 실패 시 건너뜀); Windows gh: winget GitHub.cli. Vercel: 양쪽 다 `npm install -g vercel` (Node 단계 성공이 전제 — npm 없으면 건너뜀). 역시 **실패해도 반드시 계속 진행**
